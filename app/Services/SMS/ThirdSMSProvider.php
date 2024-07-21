@@ -15,7 +15,7 @@ class ThirdSMSProvider implements SMSServiceInterface
             'api_key'       => $config['username'],
             'api_secret'    => $config['password'],
             'to'            => $phone_number,
-            'from'          => $config['from'],
+            'from'          => $config['receptor'],
             'text'          => $message,
         ]);
         return $response->json();
