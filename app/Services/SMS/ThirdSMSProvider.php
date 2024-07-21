@@ -11,12 +11,13 @@ class ThirdSMSProvider implements SMSServiceInterface
     public function send($phone_number, $message):array
     {
         $config = config('sms.providers.third');
-        $response = Http::withBasicAuth($config['username'], $config['password'])
-            ->post($config['url'], [
-                'From' =>$config['receptor'],
-                'To' => $phone_number,
-                'Message' => $message,
-            ]);
+        $response = Http::post($config['url'], [
+            'api_key'       => $config['username'],
+            'api_secret'    => $config['password'],
+            'to'            => $phone_number,
+            'from'          => $config['from'],
+            'text'          => $message,
+        ]);
         return $response->json();
     }
 }
